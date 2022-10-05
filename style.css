@@ -1,0 +1,182 @@
+/* Variables */
+
+:root {
+    --cell-width: 100px;
+    --cell-height: 100px;
+    --cell-content-width: calc(var(--cell-width) * 0.9);
+    --cell-content-height: calc(var(--cell-height) * 0.9);
+    --background-color: #ede9e3;
+    --border-color: #9fb1bc;
+    --x-color: #2e5266;
+    --o-color: #ffd772;
+    --text-color: #ffd772;
+    --button-background-color: #9fb1bc;
+    --button-text-color: #ffd772;
+    --button-border-color: #ffd772;
+    --pop-up-background: rgba(0, 0, 0, 0.9);
+}
+
+/* Global Styles*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Board Settings Styles */
+
+.tik-tac-toe_board {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+.tik-tac-toe_cell {
+  width: var(--cell-width);
+  height: var(--cell-height);
+  border: 2px solid var(--border-color);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tik-tac-toe_cell:nth-child(1),
+.tik-tac-toe_cell:nth-child(2),
+.tik-tac-toe_cell:nth-child(3) {
+  border-top: none;
+}
+
+.tik-tac-toe_cell:nth-child(1),
+.tik-tac-toe_cell:nth-child(2),
+.tik-tac-toe_cell:nth-child(3) {
+  border-top: none;
+}
+
+.tik-tac-toe_cell:nth-child(1),
+.tik-tac-toe_cell:nth-child(4),
+.tik-tac-toe_cell:nth-child(7) {
+  border-left: none;
+}
+
+.tik-tac-toe_cell:nth-child(3),
+.tik-tac-toe_cell:nth-child(6),
+.tik-tac-toe_cell:nth-child(9) {
+  border-right: none;
+}
+
+.tik-tac-toe_cell:nth-child(7),
+.tik-tac-toe_cell:nth-child(8),
+.tik-tac-toe_cell:nth-child(9) {
+  border-bottom: none;
+}
+
+/* Xs and Os Styles */
+
+.tik-tac-toe_cell--x::before,
+.tik-tac-toe_cell--x::after,
+.tik-tac-toe_board--first-turn-x .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::before,
+.tik-tac-toe_board--first-turn-x .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--cell-content-width) * 0.15);
+  height: var(--cell-content-height);
+  background-color: var(--x-color);
+}
+
+.tik-tac-toe_cell--x::before,
+.tik-tac-toe_board--first-turn-x .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::before {
+  transform: rotate(45deg);
+}
+
+.tik-tac-toe_cell--x::after,
+.tik-tac-toe_board--first-turn-x .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::after {
+  transform: rotate(-45deg);
+}
+
+.tik-tac-toe_cell--o::before,
+.tik-tac-toe_cell--o::after,
+.tik-tac-toe_board--first-turn-o .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::before,
+.tik-tac-toe_board--first-turn-o .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.tik-tac-toe_cell--o::before,
+.tik-tac-toe_board--first-turn-o .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::before {
+  width: var(--cell-content-width);
+  height: var(--cell-content-height);
+  background-color: var(--o-color);
+}
+
+.tik-tac-toe_cell--o::after,
+.tik-tac-toe_board--first-turn-o .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::after {
+  width: calc(var(--cell-content-width) * 0.7);
+  height: calc(var(--cell-content-height) * 0.7);
+  background-color: var(--background-color);
+}
+
+.tik-tac-toe_cell--x,
+.tik-tac-toe_cell--o {
+  cursor: not-allowed;
+}
+
+.tik-tac-toe_board--first-turn-x .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::before,
+.tik-tac-toe_board--first-turn-x .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::after {
+    background-color: var(--x-color);
+}
+
+.tik-tac-toe_board--first-turn-o .tik-tac-toe_cell:not(.tik-tac-toe_cell--x):not(.tik-tac-toe_cell--o):hover::before {
+    background-color: var(--o-color);
+}
+
+/* Message Styles */
+
+.tik-tac-toe_message {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--pop-up-background);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tik-tac-toe_message-text {
+    color: var(--text-color);
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.tik-tac-toe_restart-button {
+    font-size: 3rem;
+    color: var(--button-text-color);
+    background-color: var(--button-background-color);
+    border: 2px solid var(--button-border-color);
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+.tik-tac-toe_restart-button:hover {
+    background-color: var(--button-text-color);
+    border: 2px solid var(--button-background-color);
+    color: var(--button-background-color);
+}
+
+.tik-tac-toe_message.show {
+    display: flex;
+} 
